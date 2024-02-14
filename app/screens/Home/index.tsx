@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -12,10 +12,11 @@ import { useStore } from 'app/store';
 import styles from './styles';
 import { GetStoresList } from 'app/services/react-query/queries/user';
 import NavigationService from 'app/navigation/NavigationService';
+import { imageList } from './constants';
 
-const homeImage = require('../../assets/mascotas.jpg');
 const Home: React.FC = () => {
   const setIsLoggedIn = useStore(state => state.setIsLoggedIn);
+  const setStoreList = useStore(state => state.setStoreList);
   const {
     isLoading: isLoadingPets,
     isFetching: isFetchingPets,
@@ -24,28 +25,42 @@ const Home: React.FC = () => {
   const onLogOut = () => {
     setIsLoggedIn(false);
   };
-  console.log(dataPets);
+
+  useEffect(() => {
+    dataPets && setStoreList(dataPets);
+  }, [dataPets, setStoreList]);
 
   const renderStores = ({ item }) => (
     <Card style={styles.card} mode="elevated">
-      <Card.Title title={item.name} />
+      <Card.Title titleStyle={styles.title} title={item.name} />
       <Card.Content>
-        <View style={styles.content}>
-          <Paragraph>Dirección: {item.address.direction}</Paragraph>
+        <View style={styles.imageContainer}>
+          <Image
+            source={imageList[Math.floor(Math.random() * imageList.length)]}
+            style={styles.images}
+          />
+        </View>
+        <View style={styles.textContent}>
           <Paragraph>
-            Horario:{' '}
-            {`Desde: ${item?.schedule?.from} - Hasta: ${item?.schedule?.end}`}
+            <Text style={styles.subtitle}>Dirección:</Text>{' '}
+            {item.address.direction}
           </Paragraph>
-          <Paragraph>Zona Horaria: ${item?.schedule?.timezone}</Paragraph>
+          <Paragraph>
+            <Text style={styles.subtitle}>Horario:</Text>
+            {` Desde: ${item?.schedule?.from} - Hasta: ${item?.schedule?.end}`}
+          </Paragraph>
+          <Paragraph>
+            <Text style={styles.subtitle}>Zona Horaria:</Text>{' '}
+            {item?.schedule?.timezone}
+          </Paragraph>
         </View>
       </Card.Content>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Button pressed!');
-          NavigationService.navigate('StoreTasks');
+          NavigationService.navigate('StoreTasks', { storeId: item?.id });
         }}>
-        <Text style={styles.buttonText}>Ver Servicios</Text>
+        <Text style={styles.buttonText}>Ver Tareas</Text>
       </TouchableOpacity>
     </Card>
   );
@@ -56,18 +71,12 @@ const Home: React.FC = () => {
         <Appbar.Content title="Iskay Pets" subtitle="Todas las tiendas" />
         <Appbar.Action icon="logout" onPress={onLogOut} />
       </Appbar.Header>
-      <View style={styles.container}>
-        <Image source={homeImage} style={styles.images} />
-      </View>
       <FlatList
         data={dataPets}
         renderItem={renderStores}
         keyExtractor={item => item.id}
         refreshControl={
-          <RefreshControl
-            refreshing={isLoadingPets || isFetchingPets}
-            onRefresh={() => {}}
-          />
+          <RefreshControl refreshing={isLoadingPets || isFetchingPets} />
         }
       />
     </View>

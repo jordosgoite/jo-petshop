@@ -18,8 +18,10 @@ export class ApiService {
     return ApiService.createInstance();
   }
 
-
   getStores = () => {
     return apiClientPets.get('/stores');
+  };
+  postCheckin = (data: { taskId: number; storeId: number }) => {
+    return apiClientPets.post('/checkin', { data });
   };
 }

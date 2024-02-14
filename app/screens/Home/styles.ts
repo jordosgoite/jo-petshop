@@ -3,27 +3,49 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
   },
   card: {
-    margin: 4,
-    backgroundColor: '#03438a',
+    margin: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#c86c5f',
   },
-  content: { flexDirection: 'row', justifyContent: 'space-between' },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  content: {
+    width: 300,
+    height: 100,
+  },
+  textContent: {
+    flexDirection: 'column',
+    padding: 30,
+  },
   images: {
     flex: 0.5,
     height: 150,
+    width: 300,
     objectFit: 'cover',
-    borderRadius: 2,
+    borderRadius: 10,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#c86c5f',
     padding: 10,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: '#fffbf6',
     fontSize: 16,
+  },
+  imageContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

@@ -3,27 +3,61 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    overflow: 'scroll',
   },
   card: {
-    margin: 4,
-    backgroundColor: '#03438a',
+    margin: 3,
+    marginBottom: 1,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#c86c5f',
+    padding: 10,
   },
   content: { flexDirection: 'row', justifyContent: 'space-between' },
-  images: {
-    flex: 0.5,
-    height: 150,
-    objectFit: 'cover',
-    borderRadius: 2,
-  },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#c86c5f',
     padding: 10,
     borderRadius: 5,
+    marginLeft: 3,
+    marginRight: 3,
+  },
+  checkinButton: {
+    width: 70,
+    padding: 5,
+    backgroundColor: '#658073',
+    borderRadius: 5,
+    textAlignVertical: 'center',
+    marginTop: 25,
+    borderWidth: 1,
+    borderColor: '#c86c5f',
   },
   buttonText: {
-    color: '#fff',
+    color: '#fffbf6',
     fontSize: 16,
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  mapcontainer: {
+    height: 200,
+    width: 300,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  tasks: {
+    marginTop: 5,
+    flexDirection: 'row',
+    textAlignVertical: 'center',
+  },
+  tasksText: {
+    textAlignVertical: 'center',
+  },
+  title: {
+    marginTop: 30,
   },
 });
 

@@ -1,5 +1,5 @@
 {
-  "name": "RNZustandBoilerPlate",
+  "name": "jo-iskaypets",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-gesture-handler": "^2.8.0",
+    "react-native-maps": "^1.10.1",
     "react-native-paper": "5.0.0-rc.10",
     "react-native-reanimated": "^2.13.0",
     "react-native-safe-area-context": "^4.4.1",
