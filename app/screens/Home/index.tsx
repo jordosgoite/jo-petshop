@@ -10,7 +10,10 @@ import {
 import { Appbar, Card, Paragraph } from 'react-native-paper';
 import { useStore } from 'app/store';
 import styles from './styles';
-import { GetStoresList } from 'app/services/react-query/queries/user';
+import {
+  GetStoresList,
+  PostResetStores,
+} from 'app/services/react-query/queries/user';
 import NavigationService from 'app/navigation/NavigationService';
 import { imageList } from './constants';
 
@@ -26,9 +29,20 @@ const Home: React.FC = () => {
     setIsLoggedIn(false);
   };
 
+  const {
+    data: responseReset,
+    isLoading: isLoadingReset,
+    mutate: doResetStores,
+  } = PostResetStores();
+
   useEffect(() => {
     dataPets && setStoreList(dataPets);
   }, [dataPets, setStoreList]);
+
+  const onResetStores = () => {
+    doResetStores();
+    console.log(responseReset.status);
+  };
 
   const renderStores = ({ item }) => (
     <Card style={styles.card} mode="elevated">
@@ -79,6 +93,11 @@ const Home: React.FC = () => {
           <RefreshControl refreshing={isLoadingPets || isFetchingPets} />
         }
       />
+      <View style={styles.resetButtonContainer}>
+        <TouchableOpacity style={styles.resetButton} onPress={onResetStores}>
+          <Text style={styles.buttonText}>Reset Stores</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

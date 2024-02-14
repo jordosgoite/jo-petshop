@@ -42,6 +42,22 @@ const styles = StyleSheet.create({
     color: '#fffbf6',
     fontSize: 16,
   },
+  resetButtonContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  resetButton: {
+    width: 110,
+    padding: 5,
+    //alignItems: 'center',
+    backgroundColor: '#658073',
+    borderRadius: 5,
+    textAlignVertical: 'center',
+    justifyContent: 'center',
+    marginTop: 25,
+    borderWidth: 1,
+    borderColor: '#c86c5f',
+  },
   imageContainer: {
     flexDirection: 'column',
     justifyContent: 'center',

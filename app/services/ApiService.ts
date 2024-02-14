@@ -21,6 +21,9 @@ export class ApiService {
   getStores = () => {
     return apiClientPets.get('/stores');
   };
+  resetStores = () => {
+    return apiClientPets.post('/stores/reset');
+  };
   postCheckin = (data: { taskId: number; storeId: number }) => {
     return apiClientPets.post('/checkin', { data });
   };

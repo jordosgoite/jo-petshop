@@ -16,10 +16,18 @@ export const GetStoresList = () => {
   });
 };
 
+export const PostResetStores = () => {
+  const staffRequestService = ApiService.createInstance();
+  return useMutation(['StoresReset'], async () => {
+    const response: AxiosResponse = await staffRequestService.resetStores();
+    return response;
+  });
+};
+
 export const PostStoreCheckin = (data: { taskId: number; storeId: number }) => {
   const staffRequestService = ApiService.createInstance();
   return useMutation(['StoresCheckin'], async () => {
     const response: AxiosResponse = await staffRequestService.postCheckin(data);
-    return response.data;
+    return response;
   });
 };

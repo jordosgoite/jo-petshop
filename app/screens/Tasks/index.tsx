@@ -4,7 +4,10 @@ import { Appbar, Card, Checkbox, Paragraph, Text } from 'react-native-paper';
 import { useStore } from 'app/store';
 import styles from './styles';
 import NavigationService from 'app/navigation/NavigationService';
-import { PostStoreCheckin } from 'app/services/react-query/queries/user';
+import {
+  PostResetStores,
+  PostStoreCheckin,
+} from 'app/services/react-query/queries/user';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MyDataParams, MyScreenParams } from './dataTypes';
 
@@ -37,7 +40,7 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
     setIsLoggedIn(false);
   };
 
-  const onCheckinn = () => {
+  const onCheckin = () => {
     doCheckin();
     console.log(isLoading, data);
   };
@@ -109,7 +112,7 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
             renderItem={renderTasks}
             keyExtractor={item => item.id}
           />
-          <TouchableOpacity style={styles.checkinButton} onPress={onCheckinn}>
+          <TouchableOpacity style={styles.checkinButton} onPress={onCheckin}>
             <Text style={styles.buttonText}>Checkin</Text>
           </TouchableOpacity>
         </Card.Content>
