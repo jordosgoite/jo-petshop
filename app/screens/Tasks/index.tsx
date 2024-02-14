@@ -27,6 +27,7 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
   const { storeId } = route.params;
   const [taskSelected, setTaskSelected] = useState('');
   const storeFullList = useStore(state => state.storeList);
+  const updateStoreFullList = useStore(state => state.setStoreList);
   const storeData: MyDataParams =
     storeFullList?.find(store => store.id === storeId) || initialDataState;
 
@@ -47,10 +48,30 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
     setIsLoggedIn(false);
   };
 
+  const updateTaskStatus = () => {
+    let tempTaskList = storeData.tasks.map(task => {
+      if (task.id === taskSelected) {
+        return { ...task, assigned: true };
+      }
+      return task;
+    });
+    let tempStoreData = storeFullList.map(store => {
+      if (store.id === storeId) {
+        return { ...store, tasks: tempTaskList };
+      }
+      return store;
+    });
+    updateStoreFullList(tempStoreData);
+    setTaskSelected('');
+  };
+
   const onCheckin = () => {
     doCheckin();
+    updateTaskStatus();
+    showModal();
     console.log(isLoading, data);
     //This endpoint is always returning a 404 error. Tested by Postman (sending the proper body data with the proper data format)
+    //Data is being updated locally
   };
   const renderShippingMethods = ({ item }) => (
     <View>

@@ -40,13 +40,16 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dataPets && setStoreList(dataPets);
-  }, [dataPets, setStoreList]);
+  }, [dataPets, setStoreList, responseReset]);
 
-  const onResetStores = () => {
-    doResetStores();
+  useEffect(() => {
     if (responseReset?.status === 200) {
       showModal();
     }
+  }, [responseReset]);
+
+  const onResetStores = () => {
+    doResetStores();
   };
 
   const renderStores = ({ item }) => (
