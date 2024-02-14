@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View, FlatList } from 'react-native';
-import { Appbar, Card, Checkbox, Paragraph, Text } from 'react-native-paper';
+import {
+  Appbar,
+  Card,
+  Checkbox,
+  Modal,
+  Paragraph,
+  Text,
+} from 'react-native-paper';
 import { useStore } from 'app/store';
 import styles from './styles';
 import NavigationService from 'app/navigation/NavigationService';
-import {
-  PostResetStores,
-  PostStoreCheckin,
-} from 'app/services/react-query/queries/user';
+import { PostStoreCheckin } from 'app/services/react-query/queries/user';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MyDataParams, MyScreenParams } from './dataTypes';
 
@@ -26,6 +30,9 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
   const storeData: MyDataParams =
     storeFullList?.find(store => store.id === storeId) || initialDataState;
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
   const setIsLoggedIn = useStore(state => state.setIsLoggedIn);
   const {
     data,
@@ -113,6 +120,14 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
             renderItem={renderTasks}
             keyExtractor={item => item.id}
           />
+          <Modal
+            visible={modalVisible}
+            contentContainerStyle={styles.containerStyle}
+            onDismiss={hideModal}>
+            <Text style={styles.modalText}>
+              La tarea ha sido seleccionada éxitosamente!
+            </Text>
+          </Modal>
           <TouchableOpacity style={styles.checkinButton} onPress={onCheckin}>
             <Text style={styles.buttonText}>Checkin</Text>
           </TouchableOpacity>

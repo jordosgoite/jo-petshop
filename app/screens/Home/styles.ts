@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     width: 300,
     height: 100,
   },
+  containerStyle: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginBottom: 100,
+  },
   textContent: {
     flexDirection: 'column',
     padding: 30,
@@ -49,7 +54,6 @@ const styles = StyleSheet.create({
   resetButton: {
     width: 110,
     padding: 5,
-    //alignItems: 'center',
     backgroundColor: '#658073',
     borderRadius: 5,
     textAlignVertical: 'center',

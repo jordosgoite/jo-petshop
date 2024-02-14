@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   content: { flexDirection: 'row', justifyContent: 'space-between' },
+  containerStyle: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginBottom: 100,
+  },
   button: {
     backgroundColor: '#c86c5f',
     padding: 10,
@@ -55,6 +60,11 @@ const styles = StyleSheet.create({
   },
   tasksText: {
     textAlignVertical: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#c86c5f',
   },
   title: {
     marginTop: 30,

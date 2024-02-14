@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   FlatList,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import { Appbar, Card, Paragraph } from 'react-native-paper';
+import { Appbar, Card, Modal, Paragraph } from 'react-native-paper';
 import { useStore } from 'app/store';
 import styles from './styles';
 import {
@@ -28,6 +28,9 @@ const Home: React.FC = () => {
   const onLogOut = () => {
     setIsLoggedIn(false);
   };
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
 
   const {
     data: responseReset,
@@ -41,7 +44,9 @@ const Home: React.FC = () => {
 
   const onResetStores = () => {
     doResetStores();
-    console.log(responseReset.status);
+    if (responseReset?.status === 200) {
+      showModal();
+    }
   };
 
   const renderStores = ({ item }) => (
@@ -93,6 +98,14 @@ const Home: React.FC = () => {
           <RefreshControl refreshing={isLoadingPets || isFetchingPets} />
         }
       />
+      <Modal
+        visible={modalVisible}
+        contentContainerStyle={styles.containerStyle}
+        onDismiss={hideModal}>
+        <Text style={styles.title}>
+          Toda la data de las stores fue reestablecida
+        </Text>
+      </Modal>
       <View style={styles.resetButtonContainer}>
         <TouchableOpacity style={styles.resetButton} onPress={onResetStores}>
           <Text style={styles.buttonText}>Reset Stores</Text>
