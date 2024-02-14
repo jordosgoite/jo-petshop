@@ -43,6 +43,7 @@ const Tasks: React.FC<MyScreenParams> = ({ route }) => {
   const onCheckin = () => {
     doCheckin();
     console.log(isLoading, data);
+    //This endpoint is always returning a 404 error. Tested by Postman (sending the proper body data with the proper data format)
   };
   const renderShippingMethods = ({ item }) => (
     <View>
